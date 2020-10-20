@@ -53,13 +53,13 @@ class myString
     }
     //Post: will initialize an object to a string literal
 
-    myString(const char* a, std::size_t) //initialization by part of a string literal
+    myString(const char* a, std::size_t size) //initialization by part of a string literal
     //Pre: c-string must not be null and have size charAmount
     {
-        if(*a.size_t >0)
+        if(size >0)
         {
           int i=0;
-            while(a[i] < size_t )
+            while(a[i] < size )
             {
               stringVar[i]= a[i++];
 
@@ -76,10 +76,10 @@ class myString
     }
     //Post: will initialize object to the charAmount of characters in a string literal
 
-    myString(const myString &) //copy constructor initializer
+    myString(const myString &data) //copy constructor initializer
     //Pre: must accepts an object of the same type
     {
-        myString.this = myString;
+        // myString.this = myString;
     }
     //Post: The initialized object will be equal to the original
 
@@ -205,38 +205,29 @@ using std::right;
 
 static int uChoose = 0;
 
-int
-mainMenu();
+int mainMenu();
 
-void
-taskA();
+void taskA();
 
-void
-taskA();
+void taskA();
 
-void
-taskB();
+void taskB();
 
-void
-taskC();
+void taskC();
 
-void
-taskD();
+void taskD();
 
-void
-taskE();
+void taskE();
 
 struct Test_myCode
 {
-  void
-  default_beg()
+  void default_beg()
   {
     uChoose = mainMenu();
     assert(!(std::cin.fail()));
     std::cout << " Main menu passed " << std::endl;
   }
-  void
-  whatAction()
+  void whatAction()
   {
     switch (uChoose)
     {
@@ -270,8 +261,7 @@ struct Test_myCode
   }
 
   // The test runner for this test class.
-  void
-  run()
+  void run()
   {
     default_beg();
     whatAction();
@@ -280,27 +270,26 @@ struct Test_myCode
 };
 
 
-int
-main()
+int main()
 {
   Test_myCode test;
-  while (true)
-  {
-    test.run();
-  }
+  std::cout << "Hey at least this can compile!\n";
+  // while (true) // Did you write this? This is bad even for testing since this loop will never end
+  // {
+  //   test.run();
+  // }
 
 }
 
 
 
-int
-mainMenu()
+int mainMenu()
 {
   // heading, input section
   cout << endl;
   cout << setw(68) << "__________________________________________________________________ " << endl;
   cout << setw(68) << "|------------------------------------------------------------------|" << endl;
-  cout << setw(68) << "|                Your Name - My Programming World                  |" << endl;
+  cout << setw(68) << "|                Milan Neupane - My Programming World              |" << endl;
   cout << setw(68) << "|                  Excellently coded solutions                     |" << endl;
   cout << setw(68) << "|__________________________________________________________________|" << endl;
   cout << left << setw(2) << "|" << setw(21) << " " << setw(43) << "   MAIN MENU"
@@ -332,9 +321,8 @@ mainMenu()
   cin >> userChoice;
   return userChoice;
 }
-
-void
-taskA()
+/**********************************************************************************************************   COMMENT STARTS HERE ***********************************************************
+void taskA()
 {
   // Check the default contsructor (ctor).
   {
@@ -513,8 +501,7 @@ taskA()
 }
 
 
-void
-taskB()
+void taskB()
 {
 // these are the test cases
   char str1[]  = "sriahc gab naeb evah emos";
@@ -560,8 +547,7 @@ taskB()
   cin.get();
 }
 
-void
-taskC()
+void taskC()
 {
 // these are the test cases
   char str1[]  = "sriahc gab naeb evah emos";
@@ -608,10 +594,9 @@ taskC()
   cin.get();
 }
 
-void
-taskD()
+void taskD()
 {
- these are the test cases
+ // these are the test cases
   char str1[]  = "sriahc gab naeb evah emos";
   bool str2[]  = {0,0,0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0};
   short str3[] = {99,98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75};
@@ -654,8 +639,7 @@ taskD()
   cin.get();
 }
 
-void
-taskE()
+void taskE()
 {
   myLList list;
    Append some values to the list.
@@ -685,6 +669,7 @@ taskE()
   cout << "end of task E" << endl;
   cin.get();
 }
+******************************************************************************************************** COMMENT ENDS HERE ***************************************************************/
 
 // This code hereafter would normally go into a dot cpp file
 //
@@ -754,5 +739,3 @@ int Employee::getMonthlySalary()
   return monthlySalary;
 }
 // myLList code should follow here
-
-
