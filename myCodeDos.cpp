@@ -50,7 +50,7 @@ class myString
         }
     }
     //Post: will initialize an object to a string literal
-    
+
     myString(const char* word, std::size_t size) //initialization by part of a string literal
     //Pre: c-string must not be null and have size charAmount
     {
@@ -75,30 +75,63 @@ class myString
     myString(const myString &data) //copy constructor initializer
     //Pre: must accepts an object of the same type
     {
-        // myString.this = myString;
+        this->stringVar = data.stringVar;
+        this->strLength = data.strLength;
+
     }
     //Post: The initialized object will be equal to the original
 
     myString(myString &&); //move constructor
 
-    bool empty() const; //empty function to tell if a string is empty or not
-    //Pre: none
+    bool empty() const //empty function to tell if a string is empty or not
+    //Pre: none{}
+    {
+      if(strLength == 0 )
+        return true;
+      return false;
+    }
     //Post: returns 1 for true and 0 for false and does not change string (1 is empty, 0 is not empty)
 
-    std::size_t size() const; //size() function to return the length of a string
+    std::size_t size() const //size() function to return the length of a string
     //Pre: none
+    {
+      return strLength;
+    }
     //Post: return the lenght of a string not including the null terminator (does not change the string)
 
-    char* data() const; //returns a raw c-string pointer
+    char* data() const //returns a raw c-string pointer
     //Pre: none
+    {
+      return stringVar;
+    }
     //Post: returns a char pointer that holds the c-string
 
-    std::size_t find(char ) const; //returns the index of the first occurrence of the target char
+    std::size_t find(char n) const //returns the index of the first occurrence of the target char
     //Pre: accepts a valid char for the target the user wants to find
+    {
+      for(int i = 0; i < strLength; ++i)
+      {
+        if(stringVar[i] == n)
+          return i;
+      }
+      return npos;
+    }
     //Post: returns index where the target first occurs or npos if not found
 
-    char* substr(std::size_t, std::size_t) const; //makes a string out of an existing string
+    char* substr(std::size_t start, std::size_t length) const //makes a string out of an existing string
     //Pre: accepts a integer for the index to start at and charAmount for the amount of characters
+    {
+      if(strLength > 0)
+      {                                                                                                                                                  /*********** FIX HERE***************/
+        char *temp = new char[length];
+        for(int i = start; i < start + length && i < strLength; ++i)
+        {
+          temp[i] = stringVar[i];
+        }
+        return temp;
+      }
+      return NULL;
+    }
     //Post: returns a char pointer for the new substring
 
     friend std::ostream& operator<<(std::ostream&, myString const&); //overload << operator to output stringVar
@@ -267,11 +300,14 @@ struct Test_myCode
 
 
 int main()
-{
+{                                                                                                                                     /* all is testing porqupinepuse***/
+  // Hello World
   //Test_myCode test;
-  myString a("Milan");
-  std::cout << "My name is: ";
-  std::cout << a.stringVar;
+  myString a("Hello World");
+  myString b = a;
+  std::cout << b.stringVar << std::endl;
+
+ std::cout << b.substr(6, 3) << std::endl;                                                                                            /*  test the fixing needed */
   // while (true) // Did you write this? This is bad even for testing since this loop will never end
   // {
   //   test.run();
