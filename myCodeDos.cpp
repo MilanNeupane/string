@@ -30,20 +30,18 @@ class myString
      stringVar = NULL;
      strLength = 0;
     }
-    myString(const char* a)//for initializing with a string
+    myString(const char* word)//for initializing with a string
     {
     //Pre: pointer must not be a null pointer
-        if(a != NULL)
+        if(word != NULL)
         {
           int i=0;
-            while(a[i] != '\n')
+            while(word[i] != NULL)
             {
-              stringVar[i]= a[i++];
-
+              stringVar[i]= word[i];
+              i++;
             }
-
-           // stringVar =  a;
-            strLength = 0;
+            strLength = i;
         }
         else
         {
@@ -52,21 +50,19 @@ class myString
         }
     }
     //Post: will initialize an object to a string literal
-
-    myString(const char* a, std::size_t size) //initialization by part of a string literal
+    
+    myString(const char* word, std::size_t size) //initialization by part of a string literal
     //Pre: c-string must not be null and have size charAmount
     {
-        if(size >0)
+        if(word != NULL && size >0)
         {
           int i=0;
-            while(a[i] < size )
+            while(strLength < size )
             {
-              stringVar[i]= a[i++];
-
+              stringVar[i]= word[i];
+              i++;
             }
-
-           // stringVar =  a;
-            strLength = 0;
+            strLength = i;
         }
         else
         {
@@ -134,7 +130,7 @@ class myString
 
     // Defines the npos value.
     static constexpr std::size_t npos = -1;
-  private:
+  public:
     char* stringVar;
 	  short strLength;
 };
@@ -272,8 +268,10 @@ struct Test_myCode
 
 int main()
 {
-  Test_myCode test;
-  std::cout << "Hey at least this can compile!\n";
+  //Test_myCode test;
+  myString a("Milan");
+  std::cout << "My name is: ";
+  std::cout << a.stringVar;
   // while (true) // Did you write this? This is bad even for testing since this loop will never end
   // {
   //   test.run();
