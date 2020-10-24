@@ -1,5 +1,5 @@
 //
-//   COPYRIGHT (C) Student@zips.uakron.edu>, 2020  All rights reserved.
+//   COPYRIGHT (C) mn111@zips.uakron.edu>, 2020  All rights reserved.
 //   Milan Neupane
 //   Purpose: This is myCode and is based upon what we study for Comp Sci
 //
@@ -19,122 +19,57 @@
 // This code would normally go into a dot hpp file
 //
 // SPECIFICATION HERE
+void reverse1(char * );
+void reverse2(bool *);
+void reverse3(short *);
+void reverse(char *);
+void reverse(bool *);
+void reverse(short *);
+template <class T>
+void reversal (T*);
 //
 // PLACE CODE HERE FOR TASK A
 // *************************************************
 class myString
 {
   public:
-    myString() // Default construction; the default value shall be the empty string.
-    {
-     stringVar = NULL;
-     strLength = 0;
-    }
-    myString(const char* word)//for initializing with a string
-    {
+    myString(); // Default construction; the default value shall be the empty string.
+
+    myString(const char*);//for initializing with a string
     //Pre: pointer must not be a null pointer
-        if(word != NULL)
-        {
-          int i=0;
-            while(word[i] != NULL)
-            {
-              stringVar[i]= word[i];
-              i++;
-            }
-            strLength = i;
-        }
-        else
-        {
-         stringVar = NULL;
-         strLength = 0;
-        }
-    }
     //Post: will initialize an object to a string literal
 
-    myString(const char* word, std::size_t size) //initialization by part of a string literal
+    myString(const char* , std::size_t ); //initialization by part of a string literal
     //Pre: c-string must not be null and have size charAmount
-    {
-        if(word != NULL && size >0)
-        {
-          int i=0;
-            while(strLength < size )
-            {
-              stringVar[i]= word[i];
-              i++;
-            }
-            strLength = i;
-        }
-        else
-        {
-         stringVar = NULL;
-         strLength = 0;
-        }
-    }
     //Post: will initialize object to the charAmount of characters in a string literal
 
-    myString(const myString &data) //copy constructor initializer
+    myString(const myString &); //copy constructor initializer
     //Pre: must accepts an object of the same type
-    {
-        this->stringVar = data.stringVar;
-        this->strLength = data.strLength;
-
-    }
     //Post: The initialized object will be equal to the original
 
     myString(myString &&); //move constructor
 
-    bool empty() const //empty function to tell if a string is empty or not
+    bool empty() const ;//empty function to tell if a string is empty or not
     //Pre: none{}
-    {
-      if(strLength == 0 )
-        return true;
-      return false;
-    }
     //Post: returns 1 for true and 0 for false and does not change string (1 is empty, 0 is not empty)
 
-    std::size_t size() const //size() function to return the length of a string
+    std::size_t size() const; //size() function to return the length of a string
     //Pre: none
-    {
-      return strLength;
-    }
     //Post: return the lenght of a string not including the null terminator (does not change the string)
 
-    char* data() const //returns a raw c-string pointer
+    char* data() const; //returns a raw c-string pointer
     //Pre: none
-    {
-      return stringVar;
-    }
     //Post: returns a char pointer that holds the c-string
 
-    std::size_t find(char n) const //returns the index of the first occurrence of the target char
+    std::size_t find(char n) const;//returns the index of the first occurrence of the target char
     //Pre: accepts a valid char for the target the user wants to find
-    {
-      for(int i = 0; i < strLength; ++i)
-      {
-        if(stringVar[i] == n)
-          return i;
-      }
-      return npos;
-    }
     //Post: returns index where the target first occurs or npos if not found
 
-    char* substr(std::size_t start, std::size_t length) const //makes a string out of an existing string
+    char* substr(std::size_t start, std::size_t length) const; //makes a string out of an existing string
     //Pre: accepts a integer for the index to start at and charAmount for the amount of characters
-    {
-      if(strLength > 0)
-      {                                                                                                                                                  /*********** FIX HERE***************/
-        char *temp = new char[length];
-        for(int i = start; i < start + length && i < strLength; ++i)
-        {
-          temp[i] = stringVar[i];
-        }
-        return temp;
-      }
-      return NULL;
-    }
     //Post: returns a char pointer for the new substring
 
-    friend std::ostream& operator<<(std::ostream&, myString const&); //overload << operator to output stringVar
+    friend std::ostream& operator<<(std::ostream &output, myString const &string); //overload << operator to output stringVar
     myString& operator=(const char*); //overload assignment operator to take string literal
     myString& operator=(const myString &); //overload assignment operator to take in an object of the same type
     myString& operator+=(const myString &); //overload operator for the concatenation
@@ -171,20 +106,9 @@ class myString
 // PLACE CODE HERE FOR TASK B
 // *************************************************
 // constant size and the overloaded function reverse
-const size_t mySize = 25;
-void reverse1(char *);
-void reverse2(bool *);
-void reverse3(short *);
+   const size_t mySize = 25;
 
-// PLACE CODE HERE FOR TASK C
-// *************************************************
 
-// PLACE CODE HERE FOR TASK D
-// *************************************************
-
-// PLACE CODE HERE FOR TASK E
-// *************************************************
-//---------------------------------------------------------------------
 // Employee class definition
 class Employee
 {
@@ -221,6 +145,33 @@ class Employee
    std::string firstName; // Employee's first name
    std::string lastName; // Employee's last name
    int monthlySalary{0}; // Employee's salary per month
+};
+//---------------------------------------------------------------------
+
+// PLACE CODE HERE FOR TASK E
+// *************************************************
+// myLList class definition
+class myLList
+{
+  struct Node
+  {
+    Employee data;
+    Node *next;
+  };
+
+  public:
+    myLList();
+  void appendNode(Employee em);
+  void appendNode(std::string &&firstName, std::string &&lastName, int &&monthlySalary);
+  void displayList();
+  void insertNode(Employee em);
+  void insertNode(std::string &&firstName, std::string &&lastName, int &&monthlySalary);
+  void deleteNode(std::string &&lastName);
+
+
+
+private:
+  Node *head;
 };
 //---------------------------------------------------------------------
 
@@ -267,13 +218,13 @@ struct Test_myCode
         taskB();
         break;
       case (3):
-        taskC();
+         taskC();
         break;
       case (4):
-        taskD();
+         taskD();
         break;
       case (5):
-        taskE();
+         taskE();
         break;
       case (6):
         //taskF();
@@ -298,24 +249,16 @@ struct Test_myCode
 
 };
 
-
 int main()
-{                                                                                                                                     /* all is testing porqupinepuse***/
-  // Hello World
-  //Test_myCode test;
-  myString a("Hello World");
-  myString b = a;
-  std::cout << b.stringVar << std::endl;
+{
 
- std::cout << b.substr(6, 3) << std::endl;                                                                                            /*  test the fixing needed */
-  // while (true) // Did you write this? This is bad even for testing since this loop will never end
-  // {
-  //   test.run();
-  // }
+  Test_myCode test;
+  while (true)
+  {
+    test.run();
+  }
 
 }
-
-
 
 int mainMenu()
 {
@@ -355,9 +298,22 @@ int mainMenu()
   cin >> userChoice;
   return userChoice;
 }
-/**********************************************************************************************************   COMMENT STARTS HERE ***********************************************************
+
 void taskA()
 {
+  // // add a test case for move construction and assignment and EARN B O N U S points!!!
+
+    // Test Case
+    // {
+    // myString milan = "This is a" + " move test";
+    // std::cout << milan << std::endl;
+    // }
+
+  /*
+    Note: To invoke move constructor, you have to pass an r-value reference instead of l-value so it's more efficient since you don't have to make a new copy because you're not calling copy constructor.
+  */
+
+
   // Check the default contsructor (ctor).
   {
     myString s;
@@ -412,7 +368,6 @@ void taskA()
     myString s2("yolo", 2); // s2 is equal to "yo".
     assert(!strcmp(s2.data(), "yo"));
   }
-
   // Copy assignment. After assignment, the assigned object on the left (s1)
   // shall be equal to the value on the right (s2).
   {
@@ -581,6 +536,7 @@ void taskB()
   cin.get();
 }
 
+
 void taskC()
 {
 // these are the test cases
@@ -591,7 +547,7 @@ void taskC()
   cout << "*** - Overloaded Reverse Functions - ***" << endl << endl;
   cout << "The arrays before and after reversing: " << endl;
   cout << " array1: " << str1 ;
-  //reverse(str1);
+  reverse(str1);
   cout << endl << " array1: " << str1 << endl;
   cout << " array2: ";
   for (int i = 0; i < mySize; ++i)
@@ -676,7 +632,7 @@ void taskD()
 void taskE()
 {
   myLList list;
-   Append some values to the list.
+  //Append some values to the list.
   cout << "Appending to the list" << endl;
   Employee employee1{"Lisa", "Able", 4500};
   list.appendNode(employee1);
@@ -703,7 +659,6 @@ void taskE()
   cout << "end of task E" << endl;
   cin.get();
 }
-******************************************************************************************************** COMMENT ENDS HERE ***************************************************************/
 
 // This code hereafter would normally go into a dot cpp file
 //
@@ -719,23 +674,389 @@ std::ostream& operator<<(std::ostream& input, myString const& rhs)
     return input;
 }
 
+
+// The Constructors
+myString::myString() // Default construction; the default value shall be the empty string.
+{
+ stringVar = NULL;
+ strLength = 0;
+}
+
+myString::myString(const char* word)//for initializing with a string
+{
+//Pre: pointer must not be a null pointer
+    if(word != NULL)
+    {
+      int i=0;
+        while(word[i] != NULL)
+        {
+          stringVar[i]= word[i];
+          i++;
+        }
+        stringVar[i]='\0'; // seting the last index to be null
+        strLength = i;
+    }
+    else
+    {
+     stringVar = NULL;
+     strLength = 0;
+    }
+}
+
+myString::myString(const char* word, std::size_t size) //initialization by part of a string literal
+//Pre: c-string must not be null and have size charAmount
+{
+    if(word != NULL && size >0)
+    {
+      int i=0;
+        while(strLength < size )
+        {
+          stringVar[i]= word[i];
+          i++;
+        }
+        strLength = i;
+    }
+    else
+    {
+     stringVar = NULL;
+     strLength = 0;
+    }
+}
+//Post: will initialize object to the charAmount of characters in a string literal
+myString::myString(const myString &data) //copy constructor initializer
+//Pre: must accepts an object of the same type
+{
+    this->stringVar = data.stringVar;
+    this->strLength = data.strLength;
+}
+//Post: The initialized object will be equal to the original
+
+myString::myString(myString &&rhs) //move constructor
+{
+  this->stringVar = rhs.stringVar;
+  this->strLength = rhs.strLength;
+  rhs.stringVar = nullptr;
+}
+
+bool myString::empty() const //empty function to tell if a string is empty or not
+//Pre: none{}
+{
+  if(strLength == 0 )
+    return true;
+  return false;
+}
+//Post: returns 1 for true and 0 for false and does not change string (1 is empty, 0 is not empty)
+
+std::size_t myString::size() const //size() function to return the length of a string
+//Pre: none
+{
+  return strLength;
+}
+//Post: return the lenght of a string not including the null terminator (does not change the string)
+
+char* myString::data() const //returns a raw c-string pointer
+//Pre: none
+{
+  return stringVar;
+}
+//Post: returns a char pointer that holds the c-string
+
+std::size_t myString::find(char n) const //returns the index of the first occurrence of the target char
+   //Pre: accepts a valid char for the target the user wants to find
+   {
+     for(int i = 0; i < strLength; ++i)
+     {
+       if(stringVar[i] == n)
+         return i;
+     }
+     return npos;
+   }
+
+//Post: returns index where the target first occurs or npos if not found
+
+   char* myString::substr(std::size_t start, std::size_t length) const //makes a string out of an existing string
+   //Pre: accepts a integer for the index to start at and charAmount for the amount of characters
+   {
+     if(strLength > 0)
+     {
+       char *temp = new char[length];
+       for(int i = start; i < start + length && i < strLength; ++i)
+       {
+         temp[i] = stringVar[i];
+       }
+       return temp;
+     }
+     return NULL;
+   }
+   //Post: returns a char pointer for the new substring
+
+
+// the overloded operators
+myString& myString::operator=(const char *str) //overload assignment operator to take string literal
+{
+  int i = 0;
+      while(str[i] != '\0')
+      {
+        this->stringVar[i] = str[i];
+        ++i;
+      }
+      this->strLength = i;
+      return *this;
+}
+
+myString& myString::operator=(const myString &rhs) //overload assignment operator to take in an object of the same type
+ {
+   if(this == &rhs)
+      {
+        return *this;
+      }
+      this->stringVar = rhs.stringVar;
+      this->strLength = rhs.strLength;
+      return *this;
+ }
+myString& myString::operator+=(const myString & rhs) //overload operator for the concatenation
+{
+  if(this == &rhs)
+      {
+        for(int i = this->strLength; i < (2 * this->strLength); ++i)
+        {
+          this->stringVar[i] = this->stringVar[i-this->strLength];
+        }
+        this->strLength += this->strLength;
+        return *this;
+      }
+      for(int i = this->strLength, j = 0; i < this->strLength + rhs.strLength; ++i)
+      {
+        this->stringVar[i] = rhs.stringVar[j];
+        j++;
+      }
+      this->strLength += rhs.strLength;
+      return *this;
+}
+char& myString::operator[](const std::size_t i ) //overload operator [] to return values and change values at index n
+{
+  // if(i > this->strLength) // If i is greater than the length of the words in stringVar
+  //   return '\0';
+  return this->stringVar[i];
+}
+const char& myString::operator[](std::size_t i ) const //const version of [] overload
+{
+  if(i > this->strLength) // If i is greater than the length of the words in stringVar
+    return '\0';
+  return this->stringVar[i];
+}
+const bool myString::operator==(const myString &rhs) const //overload for ==
+{
+  if(this->stringVar == rhs.stringVar)
+    return true;
+  else
+    return false;
+}
+const bool myString::operator!=(const myString &rhs) const //overload for !=
+{
+  if(this->stringVar == rhs.stringVar)
+    return false;
+  else
+    return true;
+}
+bool myString::operator<(myString &rhs) const //overloading < comparison operator
+{
+  if(this->stringVar < rhs.stringVar)
+    return true;
+  else
+    return false;
+}
+ bool myString::operator<(const char *str) //overloading < comparison operator for string literal
+ {
+   if(this->stringVar < str)
+     return true;
+   else
+     return false;
+ }
+bool myString::operator<=(myString &rhs) const //overloading <= comparison operator
+{
+  if(this->stringVar <= rhs.stringVar)
+    return true;
+  else
+    return false;
+}
+bool myString::operator<=(const char *str) //overloading <= comparison operator for string literal
+{
+  if(this->stringVar <= str)
+    return true;
+  else
+    return false;
+}
+bool myString::operator>(myString &rhs) const //overloading > comparison operator
+{
+  if(this->stringVar > rhs.stringVar)
+    return true;
+  else
+    return false;
+}
+bool myString::operator>(const char *str) //overloading > comparison operator for string literal
+{
+  if(this->stringVar > str)
+    return true;
+  else
+    return false;
+}
+bool myString::operator>=(myString &rhs) const //overloading >= comparison operator
+{
+  if(this->stringVar >= rhs.stringVar)
+    return true;
+  else
+    return false;
+}
+bool myString::operator>=(const char *str) //overloading >= comparison operator for string literal
+{
+  if(this->stringVar >= str)
+    return true;
+  else
+    return false;
+}
+myString myString::operator+(myString &rhs) const //overloading + operator
+{
+  myString ans = *this;
+  ans += rhs;
+  return ans;
+}
+myString& myString::operator=(myString &&rhs) //move assignment operator
+{
+  if(this->stringVar == rhs.stringVar)
+    return *this;
+  else
+    this->stringVar = rhs.stringVar;
+    return *this;
+}
+
 // PLACE CODE HERE FOR TASK B
 // *************************************************
+
+void reverse1(char * myWord)
+{
+  short l =0;           // front index of the array
+  short r = mySize -1;  // back index of the array
+  char temp;
+  while(l<r)
+  {
+    //swap myWord[l] and  myWord[r]
+    temp = myWord[l];
+    myWord[l]= myWord[r];
+    myWord[r]=temp;
+    l++;
+    r--;
+  }
+}
+void reverse2(bool *myBit)
+{
+  short l = 0;
+  short r = mySize - 1;
+  bool temp;
+
+  while(l<r)
+  {
+    temp = myBit[l];
+    myBit[l] = myBit[r];
+    myBit[r] = temp;
+    l++;
+    r--;
+  }
+}
+void reverse3(short * myNum)
+{
+  short l = 0;         // front index of the array
+  short r = mySize-1;  // back index of the array
+  short temp;
+  while(l<r)
+  {
+    //swap myNum[l] and myNum[r]
+    temp = myNum[l];
+    myNum[l]= myNum[r];
+    myNum[r]=temp;
+    l++;
+    r--;
+  }
+}
 // TASK B CODE
 
 // PLACE CODE HERE FOR TASK C
 // *************************************************
+  void reverse(char *myWord)
+  {
+    short l =0;           // front index of the array
+    short r = mySize -1;  // back index of the array
+    char temp;
+    while(l<r)
+    {
+      //swap myWord[l] and  myWord[r]
+      temp = myWord[l];
+      myWord[l]= myWord[r];
+      myWord[r]=temp;
+      l++;
+      r--;
+    }
+  }
+
+  void reverse(short *myNum)
+  {
+    short l = 0;         // front index of the array
+    short r = mySize-1;  // back index of the array
+    short temp;
+    while(l<r)
+    {
+      //swap myNum[l] and myNum[r]
+      temp = myNum[l];
+      myNum[l]= myNum[r];
+      myNum[r]=temp;
+      l++;
+      r--;
+    }
+  }
+
+  void reverse(bool *myBit)
+  {
+    short l = 0;
+    short r = mySize - 1;
+    bool temp;
+
+    while(l<r)
+    {
+      temp = myBit[l];
+      myBit[l] = myBit[r];
+      myBit[r] = temp;
+      l++;
+      r--;
+    }
+  }
 // TASK C CODE
 
 // PLACE CODE HERE FOR TASK D
 // *************************************************
+template <class T>
+void reversal (T *data)
+{
+  short l = 0;
+  short r = mySize - 1;
+  T temp;
+
+  while(l<r)
+  {
+    temp = data[l];
+    data[l] = data[r];
+    data[r] = temp;
+    l++;
+    r--;
+  }
+}
 // TASK D CODE
 
 // PLACE CODE HERE FOR TASK E
 // *************************************************
+
 // TASK E CODE
-// Employee class methods
-// set first name
+//Employee class methods
+//set first name
 void Employee::setFirstName(const std::string &name)
 {
   firstName = name; // no validation needed
@@ -773,3 +1094,131 @@ int Employee::getMonthlySalary()
   return monthlySalary;
 }
 // myLList code should follow here
+myLList::myLList()
+:head{nullptr}{}
+
+void myLList::appendNode(Employee em)
+{
+  if(!head)
+  {
+    head = new Node{em, nullptr};
+  }
+  else
+  {
+    Node *temp = head;
+    while(temp->next)
+    {
+      temp = temp->next;
+    }
+    temp->next = new Node{em, nullptr};
+  }
+}
+
+void myLList::appendNode(std::string &&firstName, std::string &&lastName, int &&monthlySalary)
+{
+  if(!head)
+  {
+    head = new Node{{firstName, lastName, monthlySalary}, nullptr};
+  }
+  else
+  {
+    Node *temp = head;
+    while(temp->next)
+    {
+      temp = temp->next;
+    }
+    temp->next = new Node{{firstName, lastName, monthlySalary}, nullptr};
+  }
+}
+
+void myLList::insertNode(Employee em)
+{
+  if(!head)
+  {
+    head = new Node{em, nullptr};
+    return;
+  }
+  Node *temp = head;
+  if(em.getLastName() < temp->data.getLastName())
+  {
+    head = new Node{em, temp};
+    return;
+  }
+  else
+  {
+    Node *temp = head;
+    while(em.getLastName() > temp->next->data.getLastName())
+    {
+      temp = temp->next;
+    }
+    Node *ptr = temp->next;
+    temp->next = new Node{em, ptr};
+  }
+}
+
+void myLList::insertNode(std::string &&firstName, std::string &&lastName, int &&monthlySalary)
+{
+  if(!head)
+  {
+    head = new Node{{firstName, lastName, monthlySalary}, nullptr};
+    return;
+  }
+  Node *temp = head;
+  if(lastName < temp->data.getLastName())
+  {
+    head = new Node{{firstName, lastName, monthlySalary}, temp};
+    return;
+  }
+  else
+  {
+    Node *temp = head;
+    while(lastName > temp->next->data.getLastName())
+    {
+      temp = temp->next;
+    }
+    Node *ptr = temp->next;
+    temp->next = new Node{{firstName, lastName, monthlySalary}, ptr};
+  }
+}
+
+void myLList::deleteNode(std::string &&lastName)
+{
+  if(head->data.getLastName() == lastName)
+  {
+    Node *temp = nullptr;
+    if(head->next)
+    {
+      temp = head->next;
+    }
+    delete head;
+    head = temp;
+    return;
+  }
+  Node *temp = head;
+  Node *prev = nullptr;
+  while(temp->next)
+  {
+    if(temp->data.getLastName() == lastName)
+    {
+      prev->next = temp->next;
+      delete temp;
+      return;
+    }
+    prev = temp;
+    temp = temp->next;
+  }
+  delete temp;
+  prev->next = nullptr;
+}
+
+void myLList::displayList()
+{
+  Node *temp = head;
+  std::string firstName, lastName;
+  int salary;
+  while(temp)
+  {
+    std::cout << temp->data.getFirstName() << " " << temp->data.getLastName() << " " << temp->data.getMonthlySalary() << std::endl;
+    temp = temp->next;
+  }
+}
